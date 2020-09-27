@@ -30,6 +30,7 @@
           "ts": "never"
         }
       ],
+      "no-useless-constructor":"off",
       "prettier/prettier": "error"
     },
     "settings": {
