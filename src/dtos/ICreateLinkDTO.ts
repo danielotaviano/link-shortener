@@ -1,4 +1,4 @@
 export default interface ICreateLinkDTO {
   originLink: string;
-  codeLink?: string;
+  codeLink: string;
 }

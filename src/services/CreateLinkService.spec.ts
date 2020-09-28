@@ -19,8 +19,6 @@ describe('create a short link', () => {
       code: 'codeExemple',
     });
 
-    expect(link).toHaveProperty('id');
-
     expect(link.originLink).toBe('https://www.google.com');
     expect(link.codeLink).toBe('codeExemple');
   });

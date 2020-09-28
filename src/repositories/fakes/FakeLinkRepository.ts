@@ -1,11 +1,13 @@
 import ICreateLinkDTO from '../../dtos/ICreateLinkDTO';
-import Link from '../../entities/Link';
+import Link from '../../infra/typeorm/entities/Link';
 import ILinkRepository from '../ILinkRepository';
 
 export default class FakeLinkRepository implements ILinkRepository {
   private links: Link[] = [];
   public async create({ originLink, codeLink }: ICreateLinkDTO): Promise<Link> {
-    const link = new Link({ codeLink, originLink });
+    const link = new Link();
+
+    Object.assign(link, { originLink, codeLink });
 
     this.links.push(link);
 

@@ -1,5 +1,6 @@
-import Link from '../entities/Link';
+import { inject, injectable } from 'tsyringe';
 import AppError from '../err/AppError';
+import Link from '../infra/typeorm/entities/Link';
 import ICodeIdProvider from '../providers/models/ICodeIdProvider';
 import ILinkRepository from '../repositories/ILinkRepository';
 import isValidUrl from '../utils/isValidUrl';
@@ -9,14 +10,17 @@ interface IRequest {
   code?: string;
 }
 
+@injectable()
 export default class CreateLinkService {
   constructor(
+    @inject('LinkRepository')
     private linkRepository: ILinkRepository,
+    @inject('CodeIdProvider')
     private codeIdProvider: ICodeIdProvider,
   ) {}
 
   public async execute({ link, code }: IRequest): Promise<Link> {
-    let codeLink: string = code;
+    let codeLink = code;
     let originLink: string = link;
 
     const isUrl = isValidUrl(originLink);
@@ -30,7 +34,7 @@ export default class CreateLinkService {
     }
 
     const existingLinkWithSameCode = await this.linkRepository.findByCodeLink(
-      code,
+      codeLink,
     );
 
     if (existingLinkWithSameCode) {

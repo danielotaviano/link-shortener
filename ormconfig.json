@@ -1,0 +1,10 @@
+{
+  "type": "mongodb",
+  "name": "default",
+  "useUnifiedTopology": true,
+  "useNewUrlParser": true,
+  "url":
+    "",
+  "entities": ["./src/infra/typeorm/entities/*.ts"]
+}
+
